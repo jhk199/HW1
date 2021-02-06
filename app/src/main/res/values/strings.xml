@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mad Libs</string>
+    <string name="button_go">Go</string>
+    <string name="button_generate">Generate</string>
+    <string name="button_home">Home</string>
+    <string name="second_activity">Generate</string>
+    <string name="third_activity">Mad Lib</string>
+    <string name="toast_message">Please fill in all the blanks to continue</string>
+
+    <string name="textView_main_title">Mad Lib Generator</string>
+
+
+</resources>
