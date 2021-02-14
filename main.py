@@ -6,6 +6,8 @@ from copy import deepcopy
 
 def main():
     # TODO: define your RiverCrossingProblem
+    crossing = RiverCrossingProblem()
+    crossing.start_state
     # TODO: solve RiverCrossing via BFS
     # TODO: solve RiverCrossing via DFS
 
