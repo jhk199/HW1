@@ -12,7 +12,7 @@ Starting with question 16, you will need to install the [simanneal](https://gith
     _If left unattended together, the wolf would eat the goat, or the goat would eat the cabbage._
 
     _The farmer's challenge was to carry himself and his purchases to the far bank of the river, leaving each purchase intact. How did he do it?_
-    (RiverCrossing.png)
+    ![alt text](RiverCrossing.png)
 
 2.	A river crossing problem is defined in RiverCrossing.py. Make sure you understand both the RiverCrossingProblem and RiverCrossingState classes.       
 a.	How is the start state represented in `RiverCrossingProblem`? What about the goal state? (Don’t overthink these)  
