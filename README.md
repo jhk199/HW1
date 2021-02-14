@@ -1,5 +1,5 @@
 # P1: Search & Constraint Satisfaction
-Collaborator(s):
+Collaborator(s): Edgar Dixon
 
 This project, as most projects in this class, requires writing a lot of code. You are free to introduce any helper methods you would like. I also encourage you to write test cases for each method you write, as that will significantly cut down on debugging time.
 
@@ -12,6 +12,7 @@ Starting with question 16, you will need to install the [simanneal](https://gith
     _If left unattended together, the wolf would eat the goat, or the goat would eat the cabbage._
 
     _The farmer's challenge was to carry himself and his purchases to the far bank of the river, leaving each purchase intact. How did he do it?_
+    /RiveCrossing.png
 
 2.	A river crossing problem is defined in RiverCrossing.py. Make sure you understand both the RiverCrossingProblem and RiverCrossingState classes.       
 a.	How is the start state represented in `RiverCrossingProblem`? What about the goal state? (Don’t overthink these)  

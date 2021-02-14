@@ -12,7 +12,7 @@ def main():
     # TODO: define 4-Queens
     # TODO: solve 4-Queens via DFS
     # TODO: solve 4-Queens via Simulated Annealing
-    
+    pass
     
 if __name__ == '__main__':
     main()

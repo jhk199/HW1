@@ -69,7 +69,7 @@ class RiverCrossingProblem:
                 self.right_bank[item] -= 1
             else:
                 raise ValueError
-            if key in self.left_bank:
+            if item in self.left_bank:
                 self.left_bank[item] += 1
             else:
                 self.left_bank[item] = 1
