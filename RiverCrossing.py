@@ -28,6 +28,7 @@ class RiverCrossingProblem:
 
     def next_state(self, state, item):  # STUDENT SOLUTION
         # TODO
+        
         pass
 
     def populate_frontier(self):  # STUDENT SOLUTION
@@ -75,6 +76,18 @@ class RiverCrossingProblem:
                 self.left_bank[item] = 1
 
         def is_valid_state(self):  # STUDENT SOLUTION
-
+            
             #TODO
-            pass
+            if (self.left_bank["farmer"] == 0) and (self.left_bank["wolf"] == 1) and (self.left_bank["goat"] == 1):
+                return False
+            if (self.left_bank["farmer"] == 0) and (self.left_bank["goat"] == 1) and (self.left_bank["cabbage"] == 1):
+                return False
+            if (self.right_bank["farmer"] == 0) and (self.right_bank["wolf"] == 1) and (self.right_bank["goat"] == 1):
+                return False
+            if (self.right_bank["farmer"] == 0) and (self.right_bank["goat"] == 1) and (self.right_bank["cabbage"] == 1):
+                return False
+            else:
+                return True
+
+
+           
