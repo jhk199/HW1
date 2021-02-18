@@ -16,6 +16,7 @@ Starting with question 16, you will need to install the [simanneal](https://gith
 
 2.	A river crossing problem is defined in RiverCrossing.py. Make sure you understand both the RiverCrossingProblem and RiverCrossingState classes.       
 a.	How is the start state represented in `RiverCrossingProblem`? What about the goal state? (Don’t overthink these)  
+    Everyone on left bank is start, everyone on right is goal state
 b.	What are the available actions for a `RiverCrossingState`?  
 c.	What parts of a state-space problem (as defined in the P&M textbook) are missing?  
 
@@ -36,8 +37,10 @@ c.	What parts of a state-space problem (as defined in the P&M textbook) are miss
     _To solve an N-Queens puzzle for some n, n chess queens must be placed on an n x n chess board, such that no queen is attacking another. Note that queens attack on the horizontal, vertical, and diagonal._
 
 10.	An N-Queens problem is defined in NQueens.py. Make sure you understand both the NQueensProblem and NQueensState classes.    
-a.	How is the start state represented in `NQueensProblem`? Why is a goal state _not_ represented?  
+a.	How is the start state represented in `NQueensProblem`? Why is a goal state _not_ represented? 
+    Start state is the whole board empty. There is no goal state because there isn't 1 perfect goal state
 b.	What are the available actions for a `NQueensState`?  
+    Checking if it's valid and placing a queen
 c.	What parts of a state-space problem (as defined in P&M textbook) are missing?  
 
 11.	Define an NQueensProblem in main.py for n=4.
@@ -49,8 +52,10 @@ c.	What parts of a state-space problem (as defined in P&M textbook) are missing?
 14.	In main.py, use DFS to solve the NQueensProblem you defined for n=4.
 
 15.	Next, we are going to try Simulated Annealing on NQueens. What should a starting state look like for Simulated Annealing? Define such a start state in main.py for n=4. Make sure to place the appropriate number of queens, but not to solve the puzzle yourself.
+    4 queens placed but not perfectly
 
 16.	We are going to use a python library,[simanneal](https://github.com/perrygeo/simanneal), to solve our NQueensProblem using Simulated Annealing. Read the library's documentation. What two methods does [simanneal](https://github.com/perrygeo/simanneal) require a problem to have? What should each of these methods do?
+    It requires a move method which randomly moves or alters the state and an enrgy function that compares current energy to previous energy and then accepts or rejects the current state based on temperature. 
 
 17.	We will define the temperature of an NQueensProblem as the number of conflicts in its current state. Fill in the `energy` method in NQueensProblem to return the temperature. _Hint: refer to your `is_valid_state` method. This will look very similar, but with a few tweaks._
 

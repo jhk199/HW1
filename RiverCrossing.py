@@ -27,13 +27,42 @@ class RiverCrossingProblem:
         return self.state == self.goal_state
 
     def next_state(self, state, item):  # STUDENT SOLUTION
-        # TODO
-        
-        pass
+        new_state = deepcopy(state)
+        if item == "farmer":
+            if(state.left_bank[item] == 1):
+                new_state.path.append(state)
+                new_state.move_to_right(item)
+                print("Item: ", item, " (farmer moves from left to right)")
+                return new_state
+            else: 
+                new_state.path.append(state)
+                new_state.move_to_left(item)
+                print("Item: ", item, " (farmer moves from right to left")
+                return new_state
+        elif state.left_bank["farmer"] == 1 and state.left_bank[item] == 1:
+            new_state.path.append(state)
+            new_state.move_to_right("farmer")
+            new_state.move_to_right(item)
+            print("farmer and ", item, " move from left to right")
+            return new_state
+        elif state.right_bank["farmer"] == 1 and state.right_bank[item] == 1:
+            new_state.path.append(state)
+            new_state.move_to_left("farmer")
+            new_state.move_to_left(item)
+            print("farmer and ", item, " move from right to left")
+            return new_state
+        else:
+            print("Farmer and ", item, " are on opposite banks")
+            return None
 
     def populate_frontier(self):  # STUDENT SOLUTION
-        # TODO
-        pass
+        names = ["farmer", "wolf", "goat", "cabbage"]
+        for x in range(0, 4):
+            print(names[x])
+            new_state = deepcopy(self.next_state(self.state, names[x]))
+            if new_state != ValueError:
+                self.frontier.append(new_state)
+
 
     class RiverCrossingState:
         def __init__(self, left, right):
@@ -78,7 +107,7 @@ class RiverCrossingProblem:
         def is_valid_state(self):  # STUDENT SOLUTION
             
             #TODO
-            if (self.left_bank["farmer"] == 0) and (self.left_bank["wolf"] == 1) and (self.left_bank["goat"] == 1):
+            if self.left_bank["farmer"] == 0 and self.left_bank["wolf"] == 1 and self.left_bank["goat"] == 1:
                 return False
             if (self.left_bank["farmer"] == 0) and (self.left_bank["goat"] == 1) and (self.left_bank["cabbage"] == 1):
                 return False

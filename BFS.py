@@ -1,26 +1,23 @@
 from copy import deepcopy
-from RiverCrossing import RiverCrossingProblem
+
 # NOTE: python's default behavior on the assignment operator for objects and dictionaries is to make a shallow copy
 # (i.e., add a pointer). This is not ideal for what we're doing here. Use deepcopy to make your life easier.
-
+# Only difference is the for loop - in DFS you start with the frontier and go to the visited
 class BreadthFirstSearch:
     def __init__(self, problem):
         self.visited = []
         self.problem = deepcopy(problem)
 
     def breadth_first_search(self): # STUDENT SOLUTION
-        # TODO: loop condition: how do we know when to break out of the loop?
-        i = 0
-        while(self.problem.is_finished() != True):
-        # TODO: check whether we should expand the current state
-            if self.problem.state.is_valid_state():       
-        # TODO: if so, populate the frontier
-                self.problem.populate_frontier()
-        # TODO: if there is a next state in the frontier, set self.problem.state to it; otherwise, break
-
-        # TODO: also do some bookkeeping: the new state should make it onto both self.visited and the problem's solution path
-
-        # TODO: return solved problem
-        pass
-
+        self.problem.frontier.append(self.problem.start_state) # Add the start state (everything on left)
+        while len(self.problem.frontier) > 0 and not self.problem.is_finished(): # While end state is not reached
+            self.problem.state = deepcopy(self.problem.frontier.pop(0)) # Get the current state
+            if(self.problem.state.is_valid_state()): # if the state works
+                self.problem.populate_frontier() # add the next state
+                for i in self.problem.frontier: # loop through frontier
+                    for j in self.visited: # loop through visited
+                        if i ==j: # if frontier matches visited
+                            self.problem.frontier.remove(j) # remove from frontier
+            self.visited.append(self.problem.state) # add visited to state
+        return self.problem.state # return the state
 
