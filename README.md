@@ -65,5 +65,8 @@ c.	What parts of a state-space problem (as defined in P&M textbook) are missing?
 19.	Call the `anneal` method from the [simanneal](https://github.com/perrygeo/simanneal) library on the NQueensProblem you defined in question 14 (follow their example for the Traveling Salesman Problem). 
 
 20.	Run simulated annealing on your NQueensProblem a few more times (you can either define deep copies of your NQueensProblem from #14, or just run your main method several times). Does the answer change? If so, what accounts for the change?
+    Yes, depending on the start state
 
 21. You may have noticed that simulated annealing doesn't always find a valid solution. Google some of the applications of simulated annealing in the real world. Why might finding such local minima (as opposed to finding a global minimum/solution) be acceptable in those applications?
+
+    Because simulated annealing has so many factors, finding the minima by choosing random locations can help find answers faster by getting rid of answers without the minima.
