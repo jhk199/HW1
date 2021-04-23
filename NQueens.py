@@ -16,11 +16,11 @@ class NQueensProblem(Annealer):
         self.frontier = []
 
     def is_finished(self):
-        self.move()
+        
         return self.state.is_valid_state() and self.state.queens_placed == self.n
 
     def next_state(self, state, row, col):
-        if state.board[row][col]!='q':
+        if state.board[row][col] != 'q':
             new_state = deepcopy(state)
             new_state.place_queen(row, col)
             return new_state
@@ -28,17 +28,23 @@ class NQueensProblem(Annealer):
             raise ValueError
 
     def populate_frontier(self):  # STUDENT SOLUTION
+        # TODO Done
         tempState = deepcopy(self.state)
-        queenLocations = deepcopy(self.state.queen_locations)
-        for i in range(self.n):
-            for j in range(self.n):
-                if i in queenLocations and j in queenLocations.get(i):
-                    pass
-                else:
-                    new_state = deepcopy(self.next_state(tempState, i, j))
-                    new_state.path = deepcopy(self.state.path)
-                    self.frontier.append(new_state)
-                    
+        queenLocations = deepcopy(tempState.queen_locations)
+        if tempState.queens_placed < self.n:
+            for row in range(self.n):
+                for col in range(self.n):
+                    #checks if a queen is already in place at location
+                    if row in queenLocations and col in queenLocations.get(row):
+                        pass
+                    #if no queen is in place, the possible location for the queen is recorded in the frontier
+                    else:
+                        newState = self.next_state(tempState, row, col)
+                        newState.path = deepcopy(self.state.path)
+                        newState.path.append(newState)
+                        self.frontier.append(newState)
+
+
 
     def move(self):  # STUDENT SOLUTION
         queenLocations = self.state.queen_locations
@@ -50,7 +56,11 @@ class NQueensProblem(Annealer):
         tempCol = choice(queenLocations.get(tempRow))
         board[tempRow][tempCol] == "0"
         queens -= 1
-        del queenLocations[tempRow]
+        if len(self.state.queen_locations.get(tempRow)) > 1:
+            self.state.queen_locations.get(tempRow).remove(tempCol)
+        else:
+            del queenLocations[tempRow]
+        
         
         newRow = randrange(0, self.n, 1)
         newCol = randrange(0, self.n, 1)
@@ -60,16 +70,29 @@ class NQueensProblem(Annealer):
             newCol = randrange(0, self.n, 1)
         
         self.state.place_queen(newRow, newCol)
-        
+
 
     def energy(self):  # STUDENT SOLUTION
+        # TODO
         temperature = 0
-        queens = deepcopy(self.state.queen_locations)
-        for i in range(self.state.queens_placed):
-            for j in range(self.state.queens_placed):
-                if queens.get(i) == queens.get(j) or (i - j) == (queens.get(i) - queens.get(j)):
-                    temperature += 1
+        usedRows = []
+        usedCols = []
+        usedDiagonals = {}
+        usedSums = []
+        usedDiffs = []
+        for row in range(self.n):
+            for col in range(self.n):
+                if self.state.board[row][col] == 'q':
+                    if row in usedRows:
+                        temperature += 2
+                    else:
+                        usedRows.append(row)
+                    if col in usedCols:
+                        temperature += 6
+                    else:
+                        usedCols.append(col)          
         return temperature
+
 
     class NQueensState():
         def __init__(self, n):
@@ -84,25 +107,43 @@ class NQueensProblem(Annealer):
             return f'{new.join(str(x) for x in self.board)}'
 
         def is_valid_state(self):  # STUDENT SOLUTION
-            colCount = []
-            rowCount = []
-            diagCount = []
-            revDiagCount = []
+           # TODO Done
+
             for row in range(self.n):
+                qInRow = 0
                 for col in range(self.n):
                     if self.board[row][col] == 'q':
-                        if(rowCount.count(row) > 0):
-                            return False
-                        rowCount.append(row)
-                        if(colCount.count(col) > 0):
-                            return False
-                        colCount.append(col)
-                        if (diagCount.count(row - col) > 0):
-                            return False
-                        diagCount.append(row - col)
-                        if (revDiagCount.count(row + col) > 0):
-                            return False
-                        revDiagCount.append(row + col)            
+                        qInRow += 1
+                    if qInRow > 1:
+                        print("too many in row")
+                        return False
+
+            for col in range(self.n):
+                qInCol = 0
+                for row in range(self.n):
+                    if self.board[row][col] == 'q':
+                        qInCol += 1
+                    if qInCol > 1:
+                        print("too many in column")
+                        return False
+
+
+            for row in range(self.n):
+                qInDiagonal = 0
+                # print(qInDiagonal)
+                for col in range(self.n):
+                    for i in range(self.n):
+                        for j in range(self.n):
+                            if ((i + j) == (row + col)) or ((i-j) == (row - col)):
+                                if self.board[i][j] == 'q' and self.board[row][col] == 'q':
+                                    qInDiagonal += 1
+                    # if qInDiagonal > 1:
+                    #     return False
+                if qInDiagonal > 1:
+                    print("too many in diagonals")
+                    return False
+
+
             return True
 
 
@@ -114,5 +155,3 @@ class NQueensProblem(Annealer):
             else:
                 self.queen_locations[row] = [col]
             return True
-
-
