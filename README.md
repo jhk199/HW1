@@ -43,6 +43,7 @@ a.	How is the start state represented in `NQueensProblem`? Why is a goal state _
 b.	What are the available actions for a `NQueensState`?  
     Checking if it's valid and placing a queen
 c.	What parts of a state-space problem (as defined in P&M textbook) are missing?  
+    A goal state is missing as well as an optimal solution criterion
 
 11.	Define an NQueensProblem in main.py for n=4.
 
@@ -65,8 +66,8 @@ c.	What parts of a state-space problem (as defined in P&M textbook) are missing?
 19.	Call the `anneal` method from the [simanneal](https://github.com/perrygeo/simanneal) library on the NQueensProblem you defined in question 14 (follow their example for the Traveling Salesman Problem). 
 
 20.	Run simulated annealing on your NQueensProblem a few more times (you can either define deep copies of your NQueensProblem from #14, or just run your main method several times). Does the answer change? If so, what accounts for the change?
-    Yes, depending on the start state
+    Yes, the answer changes every time I run it. If I change the position of the queens, it doens't seem to do much. I guess the change is the different set of moves the annealing function uses each time. Also, SA sometimes chooses incorrect, or 'bad' moves ot test the water. This alsp contributes to the change.
 
 21. You may have noticed that simulated annealing doesn't always find a valid solution. Google some of the applications of simulated annealing in the real world. Why might finding such local minima (as opposed to finding a global minimum/solution) be acceptable in those applications?
 
-    Because simulated annealing has so many factors, finding the minima by choosing random locations can help find answers faster by getting rid of answers without the minima.
+    Because simulated annealing has so many factors, finding the minima by choosing random locations can help find answers faster by getting rid of answers without the minima. I found a dense paper on SA where they talk about European Flight planning routes. This involved 4D mapping of flights and was a huge state space. By using SA, the authors were able to plan out each daily flight in a relatively short amount of time - they were fine with sub-optimal answers from SA because they got good enough responses that didn't take too much time or memory.

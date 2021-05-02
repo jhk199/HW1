@@ -4,6 +4,7 @@ from RiverCrossing import RiverCrossingProblem
 from NQueens import NQueensProblem
 from copy import deepcopy
 
+
 def main():
     # TODO: define your RiverCrossingProblem
     leftStart = {
@@ -45,25 +46,18 @@ def main():
     solutionC = DepthFirstSearch(queens)
     print(DepthFirstSearch.depth_first_search(solutionC))
     
-    
 
-    
-    # TODO: solve 4-Queens via Simulated Annealing
-    
-    
+ 
+ 
 if __name__ == '__main__':
-    main()
+ 
+    queens = NQueensProblem(4)
+    queens.state.place_queen(0, 2)
+    queens.state.place_queen(1, 0)
+    queens.state.place_queen(2, 3)
+    queens.state.place_queen(2, 2)
+    # TODO: solve 4-Queens via DFS
+    # solutionC = DepthFirstSearch(queens)
+    # print(DepthFirstSearch.depth_first_search(solutionC))
 
-
-
-
-# tempState = deepcopy(self.state)
-#         queenLocations = deepcopy(self.state.queen_locations)
-#         for i in range(self.n):
-#             for j in range(self.n):
-#                 if i in queenLocations and j in queenLocations.get(i):
-#                     pass
-#                 else:
-#                     new_state = deepcopy(self.next_state(self.tempState, i, j))
-#                     new_state.path = deepcopy(self.state.path)
-#                     self.frontier.append(new_state)
+    test, miles = queens.anneal()

@@ -47,28 +47,27 @@ class NQueensProblem(Annealer):
 
 
     def move(self):  # STUDENT SOLUTION
-        queenLocations = self.state.queen_locations
-        board = self.state.board
-        queens = self.state.queens_placed
-
-        rowList = list(queenLocations.keys())
-        tempRow = choice(rowList)
-        tempCol = choice(queenLocations.get(tempRow))
-        board[tempRow][tempCol] == "0"
-        queens -= 1
+        previousRows = list(self.state.queen_locations.keys())
+        # print(len(previousRows))
+ 
+        tempRow = choice(previousRows)
+        tempCol = choice(self.state.queen_locations.get(tempRow))
+ 
+        self.state.board[tempRow][tempCol] = '0'
+        self.state.queens_placed -= 1
         if len(self.state.queen_locations.get(tempRow)) > 1:
             self.state.queen_locations.get(tempRow).remove(tempCol)
         else:
-            del queenLocations[tempRow]
+            del self.state.queen_locations[tempRow]
         
         
         newRow = randrange(0, self.n, 1)
-        newCol = randrange(0, self.n, 1)
-
-        while board[newRow][newRow] == "q" or (newRow == tempRow and newCol == tempCol):
+        newCol = randrange(0,self.n, 1)
+ 
+        while self.state.board[newRow][newCol] == 'q' or (newRow == tempRow and newCol == tempCol):
             newRow = randrange(0, self.n, 1)
             newCol = randrange(0, self.n, 1)
-        
+ 
         self.state.place_queen(newRow, newCol)
 
 
@@ -107,45 +106,34 @@ class NQueensProblem(Annealer):
             return f'{new.join(str(x) for x in self.board)}'
 
         def is_valid_state(self):  # STUDENT SOLUTION
-           # TODO Done
-
+            # Brute Forcing Row Check
             for row in range(self.n):
-                qInRow = 0
+                qRow = 0
                 for col in range(self.n):
                     if self.board[row][col] == 'q':
-                        qInRow += 1
-                    if qInRow > 1:
-                        print("too many in row")
+                        qRow += 1
+                    if qRow > 1:
                         return False
-
+            # Brute Forcing Row Check     
             for col in range(self.n):
-                qInCol = 0
+                qCol = 0
                 for row in range(self.n):
                     if self.board[row][col] == 'q':
-                        qInCol += 1
-                    if qInCol > 1:
-                        print("too many in column")
+                        qCol += 1
+                    if qCol > 1:
                         return False
-
-
+            # Brute Forcing Diagonal Check
             for row in range(self.n):
-                qInDiagonal = 0
-                # print(qInDiagonal)
+                qDiagonal = 0
                 for col in range(self.n):
                     for i in range(self.n):
                         for j in range(self.n):
                             if ((i + j) == (row + col)) or ((i-j) == (row - col)):
                                 if self.board[i][j] == 'q' and self.board[row][col] == 'q':
-                                    qInDiagonal += 1
-                    # if qInDiagonal > 1:
-                    #     return False
-                if qInDiagonal > 1:
-                    print("too many in diagonals")
+                                    qDiagonal += 1
+                if qDiagonal > 1:
                     return False
-
-
             return True
-
 
         def place_queen(self, row, col):
             self.board[row][col] = 'q'
