@@ -20,6 +20,8 @@ a.	How is the start state represented in `RiverCrossingProblem`? What about the 
 b.	What are the available actions for a `RiverCrossingState`?  
     It can move right, left, check if it's valid, and check if it can move
 c.	What parts of a state-space problem (as defined in the P&M textbook) are missing?  
+    A goal state and an optimal solution are missing
+
 
 3.	In main.py, start filling in the function main(), which we will use to test our solutions. Start by defining a RiverCrossingProblem to match the description in question 1, above. Assume that the farmer starts on the left riverbank. _Note: We use a two-bank representation to make it easier to visualize the problem._ 
 
